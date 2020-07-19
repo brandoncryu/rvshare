@@ -16,6 +16,7 @@ class RvshareItem(scrapy.Item):
     year = scrapy.Field()
     vehicle_type = scrapy.Field()
     length = scrapy.Field()
+    distance = scrapy.Field()
 
     
 

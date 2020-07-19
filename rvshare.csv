@@ -1,3 +1,5 @@
-length,location,name,price,sleeps,vehicle_type,year
-29.0ft,"Brooklyn, NY",2017 THOR FREEDOM ELITE 29 ft,$200,6,Class C Motor Home,2017
-21.0ft,"Randolph, NJ",2020 Jayco Jay Flight SLX 7 174BH,$115,5,Travel Trailer,2020
+distance,length,location,name,price,sleeps,vehicle_type,year
+"3.2 miles from Denver, CO",28.42ft,"Denver, CO",2020 Keystone Hideout,$150,8,Travel Trailer,2020
+"12.1 miles from Denver, CO",21.0ft,"Littleton, CO",PERFECT SIZE FOR A FAMILY OF 4,$160,4,Travel Trailer,2020
+"9.1 miles from Las Vegas, NV",24.0ft,"Las Vegas, NV",2020 Forest River Evo 2360,$99,6,Travel Trailer,2020
+"8.6 miles from Las Vegas, NV",29.0ft,"Las Vegas, NV",2018 Heritage Glen Forest River Hyper-Ly...,$99,6,Travel Trailer,2018
