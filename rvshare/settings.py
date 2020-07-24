@@ -14,7 +14,7 @@ BOT_NAME = 'rvshare'
 SPIDER_MODULES = ['rvshare.spiders']
 NEWSPIDER_MODULE = 'rvshare.spiders'
 
-
+RETRY_ENABLED = False
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'rvshare (+http://www.yourdomain.com)'
 

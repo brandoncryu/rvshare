@@ -10,7 +10,7 @@ from scrapy.exporters import CsvItemExporter
 class RvsharePipeline(object):
 
     def __init__(self):
-        self.filename = 'rvshare.csv'
+        self.filename = 'rvshare_20to23.csv'
 
     def open_spider(self, spider):
         self.csvfile = open(self.filename, 'wb')

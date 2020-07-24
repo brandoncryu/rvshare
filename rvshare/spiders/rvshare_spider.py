@@ -8,12 +8,20 @@ class RvshareSpider(Spider):
     start_urls = ['https://rvshare.com/']
 
     def parse(self, response):
+        '''
+        Start at main rvshare.com site. Find popular city destinations URLs.
+        Total of 23 popular cities.
+        '''
         city_urls = response.xpath('//ul[@class="popular-destinations__list"]')[1].xpath('./li[@class="popular-destinations__list-item"]/a/@href').extract()[:-1]
         # print(city_urls)
-        for url in city_urls[:5]:
-            yield Request(url=url, callback=self.parse_city_listings)
+        for url in city_urls[20:]:
+            yield Request(url=url, callback=self.parse_city_start_page)
 
-    def parse_city_listings(self, response):
+    def parse_city_start_page(self, response):
+        '''
+        For each popular city, find the total number of listings/27(total listings/page) to find num_pages
+        Iterate through all pages per city.
+        '''
         num_pages = response.xpath('//div[@class="Box-mhcuhk-0 Text-pe2fh5-0 ghgJjM"]/text()').extract()
         num_pages = int(int(re.findall('of (\d+)',num_pages[0])[0])/27)
         initial_url = response.request.url
@@ -21,19 +29,25 @@ class RvshareSpider(Spider):
         # print(num_pages)
 
         url_list = [f'{initial_url}?page={i}' for i in range(1, num_pages+1)]
-        for url in url_list[:5]:
-            yield Request(url=url, callback=self.parse_results_page)
+        for url in url_list:
+            yield Request(url=url, callback=self.parse_city_results_page)
 
-    def parse_results_page(self, response):
+    def parse_city_results_page(self, response):
+        '''
+        On each page for a city, iterate through each individual listing
+        '''
         listing_urls = response.xpath('//div[@class="Box-mhcuhk-0 Flex-ofb2h0-0 RVCardstyles__MetaWrapper-sc-1bwuzqm-5 hCxFSr"]/a/@href').extract()
         listing_urls = [f'https://rvshare.com/{suffix}' for suffix in listing_urls]
         distance_list = response.xpath('//div[@class="Box-mhcuhk-0 Flex-ofb2h0-0 lfwVrU"]/div/span/span/text()').extract()
         # print(distance_list)
         
-        for i, url in enumerate(listing_urls[:5]):
+        for i, url in enumerate(listing_urls):
             yield Request(url=url, callback=self.parse_listing_page, meta={'distance': distance_list[i][:]})
 
     def parse_listing_page(self, response):
+        '''
+        Find feature items in each listing page
+        '''
         name = response.xpath('//div[@class="RvTitle__RvTitleContainer-hskm81-0 ecAmPT"]/div/h1/text()').extract_first()
         # price = response.xpath('//div[@data-id="nightly-rate"]/span/text()').extract_first()
         price_nightly = response.xpath('//*[@id="rates"]/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/text()').extract_first()
