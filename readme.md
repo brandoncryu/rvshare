@@ -13,4 +13,4 @@ I scraped 12,000 rental RV listings from www.rvshare.com using Scrapy on 7/20/20
 
 * RVshare.ipynb file is a jupyter notebook that contains all the python code done for analysis.
 
-* Picking the perfect RV for your trip.pdf contains a presentation on y findings
+* Picking the perfect RV for your trip.pdf contains a presentation on my findings
